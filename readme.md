@@ -1,7 +1,3 @@
-## Backend Assignment: 
-Simple Todos on Board API The assignment involves the creation of a Todo on different boards via REST JSON API using ASP.NET Core. Please use the following libraries and versions:
-   - ASP.NET Core 5.0+
-
 ## Todos on Board API: 
 We want to create RESTful APIs for a simple Todo management application. The APIs will perform CRUD operation for Todos and Boards. Todos are organized in boards, on every board there can be multiple Todos. A Todo contains a title (str), done (bool), a created (datetime) and updated (datetime) timestamp. A board has a name (str).
 
@@ -16,19 +12,12 @@ Via a REST API it must be possible to:
 - Change a Todo's title or status 
 - Delete a Todo 
 
-User management and authentication is a plus. The data have to be persisted in SQL Server using EF Core.
+For testing and api understanding all endpoints and params and urls you can refer to file of postman collection for the api "TodoAndBoard.postman_collection".
 
-## How to work on the assessment:
-Clone this repository - https://github.com/cybergroupdevs/todoonboard-api
+## To run this api
 
-Start working on the assignment
-
-Please do periodic commits with meaningful commit messages
-
-Once you are done push your final results
-
-Please include a brief description how to run your solution
-
-If you have any questions contact me (lagnesh.thakur@cygrp.com)
-
-Please note that any solution without periodic commits or inexecutable code will not be considered.
+- First please change the connectionString according to your database in appsettings.json.
+- Then .net 5.0 have to be in your system.
+- For migration of data please run "dotnet ef database update migrateDB".
+- Now you can run the api by "dotnet run".
+- And for testing you can import "TodoAndBoard.postman_collection" in postman.

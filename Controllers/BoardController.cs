@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using todoonboard_api.Context;
 using todoonboard_api.Models;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ using todoonboard_api.infoModels;
 namespace todoonboard_api.Controllers{
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class BoardController : ControllerBase{
         private readonly DBContext _context;
         public BoardController(DBContext context)

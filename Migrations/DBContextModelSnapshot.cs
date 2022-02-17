@@ -63,6 +63,30 @@ namespace todoonboard_api.Migrations
                     b.ToTable("Todos");
                 });
 
+            modelBuilder.Entity("todoonboard_api.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("todoonboard_api.Models.Todo", b =>
                 {
                     b.HasOne("todoonboard_api.Models.Boards", "Boards")

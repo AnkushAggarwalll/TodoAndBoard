@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using todoonboard_api.Context;
 using Microsoft.EntityFrameworkCore;
+using todoonboard_api.Helpers;
+using todoonboard_api.Services;
 
 namespace todoonboard_api
 {
@@ -30,7 +32,13 @@ namespace todoonboard_api
         {
 
             services.AddControllers();
+
             services.AddDbContext<DBContext>(option => option.UseSqlServer(Configuration.GetConnectionString("WebApiDatabase")));
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+            // configure DI for application services
+            services.AddScoped<IUserService, UserService>();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "todoonboard_api", Version = "v1" });
@@ -52,6 +60,8 @@ namespace todoonboard_api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

@@ -12,6 +12,7 @@ namespace todoonboard_api.Context
 
         public DbSet<Boards> Boards { get; set; } = null!;
         public DbSet<Todo> Todos { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
         
     }
 }

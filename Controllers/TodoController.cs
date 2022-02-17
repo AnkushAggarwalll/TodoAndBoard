@@ -11,6 +11,7 @@ using todoonboard_api.infoModels;
 namespace todoonboard_api.Controllers{
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class TodoController : ControllerBase{
         
         private readonly DBContext _context;
