@@ -64,5 +64,21 @@ namespace todoonboard_api.Controllers{
                 return NotFound();
             }
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteTodo(int id)
+        {
+            var todo = _context.Todos.Find(id);
+
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            _context.Todos.Remove(todo);
+            _context.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
