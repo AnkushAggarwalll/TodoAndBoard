@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using todoonboard_api.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace todoonboard_api
 {
@@ -28,6 +30,7 @@ namespace todoonboard_api
         {
 
             services.AddControllers();
+            services.AddDbContext<DBContext>(option => option.UseSqlServer(Configuration.GetConnectionString("WebApiDatabase")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "todoonboard_api", Version = "v1" });
