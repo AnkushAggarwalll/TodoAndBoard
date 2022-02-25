@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "30ceaff4-7a69-400b-9480-95e887b6ebd2",
+		"_postman_id": "74e0dccf-75e6-432d-b386-d3ce3211f225",
 		"name": "TodoAndBoard",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -105,7 +105,20 @@
 			"name": "get todos of a board",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/board/BoardTodos/{id}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"board",
+						"BoardTodos",
+						"{id}"
+					]
+				}
 			},
 			"response": []
 		},
@@ -113,7 +126,19 @@
 			"name": "uncompleted todos",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/todo/uncompletedTasks",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"todo",
+						"uncompletedTasks"
+					]
+				}
 			},
 			"response": []
 		},
@@ -132,7 +157,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/todo/2",
+					"raw": "https://localhost:5001/todo/{boardID}",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -140,7 +165,7 @@
 					"port": "5001",
 					"path": [
 						"todo",
-						"2"
+						"{boardID}"
 					]
 				}
 			},
@@ -149,27 +174,11 @@
 		{
 			"name": "many todo insert",
 			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "edit a todo",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "delete a todo",
-			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":11,\r\n    \"title\":\"ankush aggarwal test\",\r\n    \"bid\":4,\r\n    \"done\":false\r\n}",
+					"raw": "[{\r\n        \"title\":\"abc\",\r\n        \"done\":true,\r\n        \"bid\":1\r\n    },\r\n    {\r\n        \"title\":\"abc2\",\r\n        \"done\":true,\r\n        \"bid\":1\r\n    },]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -177,7 +186,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/todo/11",
+					"raw": "https://localhost:5001/todo/insertMany",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -185,7 +194,65 @@
 					"port": "5001",
 					"path": [
 						"todo",
-						"11"
+						"insertMany"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit a todo",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"abc\",\r\n    \"done\":false,\r\n    \"bid\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/todo/{TodoID}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"todo",
+						"{TodoID}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a todo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/todo/{TodoID}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"todo",
+						"{TodoID}"
 					]
 				}
 			},
@@ -194,16 +261,57 @@
 		{
 			"name": "add user",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"FirstName\":\"a\",\r\n    \"LastName\":\"b\",\r\n    \"Username\":\"abc\",\r\n    \"Password\":\"abc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/create",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"create"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "get token by username and password",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\":\"a\",\r\n    \"Password\":\"a\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/users/authenticate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"users",
+						"authenticate"
+					]
+				}
 			},
 			"response": []
 		},
@@ -211,15 +319,47 @@
 			"name": "get all users",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"users"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "add board to a user",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"uid\":1,\r\n    \"bid\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/users/assignBoard",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"users",
+						"assignBoard"
+					]
+				}
 			},
 			"response": []
 		},
@@ -227,7 +367,19 @@
 			"name": "get boards of a user",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/users/{userID}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"users",
+						"{userID}"
+					]
+				}
 			},
 			"response": []
 		}
