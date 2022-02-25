@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using todoonboard_api.infoModels;
@@ -14,6 +15,8 @@ namespace todoonboard_api.Models
 
         [JsonIgnore]
         public string Password { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<BoardsUser> BoardsUser {get;set;}
         public User() {
         }
 

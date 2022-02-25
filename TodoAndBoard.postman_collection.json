@@ -214,6 +214,22 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "add board to a user",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get boards of a user",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }

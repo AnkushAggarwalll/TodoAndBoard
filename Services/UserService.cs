@@ -12,6 +12,9 @@ using System.Collections.Generic;
 using todoonboard_api.Context;
 using System.Linq;
 using System;
+using EncryptionandDecryption;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 
 public interface IUserService
 {
@@ -20,6 +23,8 @@ public interface IUserService
     User GetById(int id);
 
     User InsertUser(UserRequest user);
+    UserBoardRequest AssignBoard(UserBoardRequest req);
+    List<Boards> GetUserBoards(int id);
 }
 namespace todoonboard_api.Services{
 
@@ -58,6 +63,7 @@ public class UserService : IUserService
     }
 
     public User InsertUser(UserRequest userRequest){
+        userRequest.Password = Cryptography.Encrypt(userRequest.Password);
         var user = new User(userRequest);
         _context.Users.Add(user);
         _context.SaveChanges();
@@ -78,6 +84,28 @@ public class UserService : IUserService
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
+    }
+    public UserBoardRequest AssignBoard(UserBoardRequest req){
+        var userBoard = new BoardsUser(req);
+        var isExist = _context.BoardsUser.Where(item => item.BoardsId == req.bid && item.UserId == req.uid).ToList();
+        if(isExist.Count==0){
+            _context.BoardsUser.Add(userBoard);
+            _context.SaveChanges();
+        return req;
+        }
+        return null;
+    }
+    public List<Boards> GetUserBoards(int id){
+        var result = (from o in _context.Boards 
+                        join i in _context.BoardsUser 
+                        on o.id equals i.BoardsId 
+                        where i.UserId == id
+                        select new Boards {id = o.id,BoardName = o.BoardName}).ToList();
+        // List<Boards> finalResult = new List<Boards>();
+        // foreach (var i in result){
+        //     finalResult.Add(new Boards((Boards)i));
+        // }
+        return result;
     }
 }
 }

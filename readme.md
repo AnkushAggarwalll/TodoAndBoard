@@ -12,6 +12,11 @@ Via a REST API it must be possible to:
 - Change a Todo's title or status 
 - Delete a Todo 
 
+Additional features(you can import postman api for better understanding and endpoints)
+- All the passwords are encrypted and stored in the db
+- You can assign a board to a user and many user can use many boards
+- You can get which user is assigned to which boards
+
 For testing and api understanding all endpoints and params and urls you can refer to file of postman collection for the api "TodoAndBoard.postman_collection".
 
 ## To run this api

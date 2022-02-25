@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace todoonboard_api.Migrations
 {
-    public partial class migrateDB : Migration
+    public partial class manytomany2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,6 +59,35 @@ namespace todoonboard_api.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "BoardsUser",
+                columns: table => new
+                {
+                    BoardsId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BoardsUser", x => new { x.BoardsId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_BoardsUser_Boards_BoardsId",
+                        column: x => x.BoardsId,
+                        principalTable: "Boards",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BoardsUser_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BoardsUser_UserId",
+                table: "BoardsUser",
+                column: "UserId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Todos_bid",
                 table: "Todos",
@@ -67,6 +96,9 @@ namespace todoonboard_api.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BoardsUser");
+
             migrationBuilder.DropTable(
                 name: "Todos");
 

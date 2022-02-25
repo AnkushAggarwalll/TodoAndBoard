@@ -10,8 +10,8 @@ using todoonboard_api.Context;
 namespace todoonboard_api.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220217092426_migrateDB")]
-    partial class migrateDB
+    [Migration("20220224121108_manytomany2")]
+    partial class manytomany2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,21 @@ namespace todoonboard_api.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Boards");
+                });
+
+            modelBuilder.Entity("todoonboard_api.Models.BoardsUser", b =>
+                {
+                    b.Property<int>("BoardsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BoardsId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BoardsUser");
                 });
 
             modelBuilder.Entity("todoonboard_api.Models.Todo", b =>
@@ -89,6 +104,25 @@ namespace todoonboard_api.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("todoonboard_api.Models.BoardsUser", b =>
+                {
+                    b.HasOne("todoonboard_api.Models.Boards", "Boards")
+                        .WithMany("BoardsUser")
+                        .HasForeignKey("BoardsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("todoonboard_api.Models.User", "User")
+                        .WithMany("BoardsUser")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Boards");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("todoonboard_api.Models.Todo", b =>
                 {
                     b.HasOne("todoonboard_api.Models.Boards", "Boards")
@@ -98,6 +132,16 @@ namespace todoonboard_api.Migrations
                         .IsRequired();
 
                     b.Navigation("Boards");
+                });
+
+            modelBuilder.Entity("todoonboard_api.Models.Boards", b =>
+                {
+                    b.Navigation("BoardsUser");
+                });
+
+            modelBuilder.Entity("todoonboard_api.Models.User", b =>
+                {
+                    b.Navigation("BoardsUser");
                 });
 #pragma warning restore 612, 618
         }
