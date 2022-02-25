@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace todoonboard_api.Migrations
 {
-    public partial class manytomany2 : Migration
+    public partial class migrateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

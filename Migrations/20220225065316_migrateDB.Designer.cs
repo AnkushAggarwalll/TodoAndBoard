@@ -10,8 +10,8 @@ using todoonboard_api.Context;
 namespace todoonboard_api.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220224121108_manytomany2")]
-    partial class manytomany2
+    [Migration("20220225065316_migrateDB")]
+    partial class migrateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
